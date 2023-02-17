@@ -30,7 +30,7 @@ abstract public class Shape {
      * @param y     center y
      * @param color the color
      */
-    protected Shape(double x, double y, Color color) {
+    public Shape(double x, double y, Color color) {
         this.x = x;
         this.y = y;
         this.color = color;

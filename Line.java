@@ -39,6 +39,29 @@ public class Line extends Shape {
     }
 
     @Override
+    public void constrain(double boxX, double boxY, double boxWidth, double boxHeight) {
+        double dx, dy;
+        // If outside the box - calculate new dx and dy
+
+        if (getX() < boxX) {
+            dx = Math.abs(getDx());
+            setVelocity(dx , getDy());
+        } else if (x2 > boxWidth) {
+            dx = -Math.abs(getDx());
+            setVelocity(dx , getDy());
+        }
+        if (getY() < boxY) {
+            dy = Math.abs(getDy());
+            setVelocity(getDx() , dy);
+        } else if (y2 > boxHeight) {
+            dy = -Math.abs(getDy());
+            setVelocity(getDx() , dy);
+        }
+
+             //||
+    }
+
+    @Override
     public String toString() {
         return super.toString() +
                 "x2=" + x2 +
