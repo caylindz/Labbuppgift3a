@@ -6,8 +6,8 @@ import javafx.scene.paint.Color;
 public class Rectangle extends FillableShape{
     private double height, width;
 
-    public Rectangle(double x, double y, double height, double width, Color color) {
-        super(x, y, color);
+    public Rectangle(double x, double y, double height, double width, Color color, boolean filled) {
+        super(x, y, color, filled);
         this.height = height;
         this.width = width;
     }

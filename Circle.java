@@ -10,8 +10,8 @@ public class Circle extends FillableShape{
 
     private double diameter;
 
-    public Circle(double x, double y, double newDiameter, Color color) {
-        super(x,y,color);
+    public Circle(double x, double y, double newDiameter, Color color, boolean filled) {
+        super(x,y,color, filled);
         setDiameter(newDiameter);
     }
 
@@ -62,4 +62,5 @@ public class Circle extends FillableShape{
                 "x2=" + getX() +
                 ", y2=" + getY();
     }
+
 }

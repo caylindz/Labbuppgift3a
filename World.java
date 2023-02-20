@@ -9,7 +9,8 @@ import javafx.scene.paint.Color;
  * @author Anders Lindström, anderslm@kth.se 2021-09-15
  */
 public class World {
-
+    public boolean filled = false;
+    private int count = 0;
     private double width, height; // this worlds width and height
 
     private final Shape[] shapes; // an array of references to the shapes
@@ -24,12 +25,17 @@ public class World {
     public World(double width, double height) {
         this.width = width;
         this.height = height;
+        shapes = new Shape[3]; // an array of references (change to non-zero size)
 
-        shapes = new Shape[1]; // an array of references (change to non-zero size)
-        shapes[0] = new Rectangle(0,0,100,150, Color.PALEGOLDENROD);
-        //shapes[0] = new Circle(100,100, 100, Color.RED);
-        //shapes[0] = new Line(20, 40, 100, 100, Color.RED);
-        shapes[0].setVelocity(20, 40);
+
+        shapes[0] = new Rectangle(0,0,100,150, Color.PALEGOLDENROD, filled);
+        shapes[1] = new Circle(100,100, 100, Color.RED, filled);
+        shapes[2] = new Line(20, 40, 100, 100, Color.BLUEVIOLET);
+
+            for(int i = 0; i <shapes.length; i++ ){
+                shapes[i].setVelocity(20+(i*5), 40+(i*5));
+            }
+
 
         // Create the actual Shape objects (sub types)
         // ....
@@ -53,9 +59,24 @@ public class World {
      * @param elapsedTimeNs the elapsed time in nanoseconds
      */
     public void moveAndConstrain(long elapsedTimeNs) {
+
         // alterantive loop: for(Shape s : shapes) { ...
         for (Shape s : shapes) {
+            count++;
             s.moveAndConstrain(elapsedTimeNs, 0, 0, width, height);
+                if(count==60){
+                    for(int i=0; i<shapes.length; i++){
+                        if(shapes[i] instanceof FillableShape){
+                            if(((FillableShape) shapes[i]).isFilled()){
+                                ((FillableShape) shapes[i]).setFilled(false);
+                            }else{
+                                ((FillableShape) shapes[i]).setFilled(true);
+                            }
+                        }
+
+                    }
+                    count=0;
+                }
         }
     }
 
